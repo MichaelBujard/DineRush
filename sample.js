@@ -6,10 +6,14 @@ var signupbutton = document.getElementById("signup-btnn");
 var database = firebase.database().ref();
 
  
+//var snapshotusersarr;
 // Sync object changes
-var snapshotusersarr = database.on('value', function(snap) {
-    console.log(snapshotToArray(snap));
+/*
+var snapshotusers = database.child('user').on('value', function(snap) {
+    snapshotusersarr = snapshotToArray(snap);
 });
+console.log(snapshotusersarr);
+*/
 
 // this adds the event listener to the sign in button.
 // Event listener activated on click, uses func() and getInfo()
@@ -22,6 +26,7 @@ signupbutton.addEventListener("click", function() {
 
 });
 
+//console.log("uniqueun DM: " + isuniqueusername("Alan"));
 /**
  * addEventListener() calls func()
  * func() handles 
@@ -43,7 +48,7 @@ function registernewuser() {
     //userpassref.set(passwordtext);
     console.log("func() DM: usernametext = " + usernametext + ", passwordtext = " +passwordtext + " at calling of createNewUser()");
     createNewUser(usernametext, passwordtext);
-    isuniqueusername(usernametext);
+    //isuniqueusername(usernametext);
 }
 
 /**
@@ -67,6 +72,23 @@ function newUser(_username, _password) {
     return !((userref == "") && (passwordref == ""));
 }
 */
+
+//checks if username is unique
+database.child('users').once('value', gotusers);
+function gotusers(snapshot, username, password){
+    var userinputarr = [];
+    var i = 0
+    snapshot.forEach(userSnapshot => {
+        i++;
+        var username = userSnapshot.key;
+        var password = userSnapshot.val()._password;
+        // now add these to an array of username and password pairs, or something
+        userinputarr.push(username);
+        userinputarr.push(password);
+        
+    })
+    console.log(userinputarr);
+}
 
 
 
@@ -148,7 +170,7 @@ class User {
     };
 }
 
-
+/*
 // Create an array from the snapshot of the user
 function snapshotToArray(snapshot) {
     var returnArr = [];
@@ -161,14 +183,16 @@ function snapshotToArray(snapshot) {
     });
     return returnArr;
 }
+*/
  
  /** now we have an array. TO check if a username already exists,
   * simply iterate through the loop and check if the username matches any one of the 
   * users' usernames.
   */
+ /*
  function isuniqueusername(username) {
      var bool = false;
-     console.log(snapshotusersarr);
+     console.log(snapshotToArray(snap));
      for (var i = 0; i < snapshotusersarr.length ; i++) {
          console.log(snapshotusersarr[i]);
          var ithuser = snapshotusersarr[i]._username;
@@ -176,7 +200,7 @@ function snapshotToArray(snapshot) {
      }
      return bool;
  }
- 
+*/
 
 /**
  * function createNewUser(_username, _password) pushes new user
