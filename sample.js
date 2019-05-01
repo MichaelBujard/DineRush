@@ -5,7 +5,72 @@ var signupbutton = document.getElementById("signup-btnn");
 // Firebase database reference
 var database = firebase.database().ref();
 
- 
+function registeraction() {
+    var usernametext = document.getElementById("signupusername").value;
+    var passwordtext = document.getElementById("signuppassword").value;
+
+    var ref = firebase.database().ref("users");
+    
+    ref.once("value").then(function(snapshot) {
+        var a = snapshot.child(usernametext).exists(); // a is now either true or false
+        // var b = snapshot.child("_username").val().exists();
+        console.log(snapshot.child(usernametext));
+        // console.log(snapshot.child("_username").val());
+        if (a) {
+            alert("Username is alread taken. Please try again")
+        }
+        else {
+            createNewUser(usernametext, passwordtext);
+        }
+    });
+}
+
+// Let's try this array thing again.
+// var datainputs = []; // an empty array to put the data into
+// var ref = database.child('users'); // This is the database reference
+/*
+ref.once('value', function(snapshot) {
+    console.log(snapshot);
+
+    datainputs.push({
+        username: snapshot.val()._username,
+        password: snapshot.val()._password
+    });
+});
+console.log(datainputs);
+console.log(datainputs[0]);
+console.log(datainputs.pop());
+//checks if username is unique
+database.child('users').once('value', gotusers);
+function gotusers(snapshot){
+    var arr = [];
+    snapshot.forEach(userSnapshot => {
+        var username = userSnapshot.key;
+        var password = userSnapshot.val()._password;
+        // now add these to an array of username and password pairs, or something
+        arr.push(username);
+        arr.push(password);
+    })
+    return arr;
+}
+*/
+
+
+/*
+function childAddedSoAddStuffToArray(scope) {
+    var ref = database.child('users');
+    var inputs = [];
+    ref.once('child_added', function(snap) {
+        scope.evalAsync(function() {
+            var inputs = snap.val();
+            DataTransferItem._
+        })
+    })
+}
+*/
+// var usersandpasswords = gotusers();
+// console.log(usersandpasswords);
+
 //var snapshotusersarr;
 // Sync object changes
 /*
@@ -22,45 +87,12 @@ signupbutton.addEventListener("click", function() {
     console.log("inside event listener, password is: " + document.getElementById("signuppassword").value);
     // getInfo();
 
- registernewuser();
+    registeraction();
 
 });
 
 //console.log("uniqueun DM: " + isuniqueusername("Alan"));
-/**
- * addEventListener() calls func()
- * func() handles 
- */
-function registernewuser() {
-    //textarea username and password input reference as string inputs
-    var usernametext = document.getElementById("signupusername").value;
-    var passwordtext = document.getElementById("signuppassword").value;
 
-    // debug messages
-    window.alert(usernametext);
-    document.getElementById("paragraph3postemail").innerHTML = "I just got clicked";
-
-    //var usersref = database.child("users");
-    //var userref = usersref.child("user1");
-    //var usernameref = userref.child("username");
-    //var userpassref = userref.child("password");
-    //usernameref.set(usernametext);
-    //userpassref.set(passwordtext);
-    console.log("func() DM: usernametext = " + usernametext + ", passwordtext = " +passwordtext + " at calling of createNewUser()");
-    createNewUser(usernametext, passwordtext);
-    //isuniqueusername(usernametext);
-}
-
-/**
- * function createUser(_username, _password) creates a user with username and password
- * returns a user with username = _username and password = _password
- */
-function createUser(_username, _password) {
-    var user = new User();
-    user.setUsername(_username);
-    user.setPassword(_password);
-    
-}
 
 /**
  * function newUser(_username) returns true if user of username _username exists,
@@ -72,26 +104,6 @@ function newUser(_username, _password) {
     return !((userref == "") && (passwordref == ""));
 }
 */
-
-//checks if username is unique
-database.child('users').once('value', gotusers);
-function gotusers(snapshot, username, password){
-    var userinputarr = [];
-    var i = 0
-    snapshot.forEach(userSnapshot => {
-        i++;
-        var username = userSnapshot.key;
-        var password = userSnapshot.val()._password;
-        // now add these to an array of username and password pairs, or something
-        userinputarr.push(username);
-        userinputarr.push(password);
-        
-    })
-    console.log(userinputarr);
-}
-
-
-
 
 // Laying out HTML webpages for where you will store the food items
 // ^^If Greg Weigel wants to help.
@@ -222,61 +234,9 @@ function createNewUser(_username, _password) {
     //isuniqueusername(user._username);
     //console.log("createNewUser(params) DM: return value of isuniqueusername(): " + isuniqueusername());
 
+
     // Put a new user in the database with path root//users//[this user's username]
     usersref = database.child("users").child(user._username);
     usersref.set(user);
     console.log("inside createNewUser(_username, _password) : "+user._username);
 }
-
-/**
- * Request class is a request object. Requests display information about a user's requests.
- */
-class Request {
-
-    constructor() {
-        this.fooditem = "none";
-        this.drinkitem = "none";
-        this.price = 0;
-    }
-
-    // Public getters and setters
-    get fooditem() {
-        return this._fooditem;
-    }
-    get drinkitem() {
-        return this._drinkitem;
-    }
-    get price() {
-        return this._price;
-    }
-
-    // setters
-    set foodItem(fi) {
-        this._fooditem = fi;
-    }
-    set drinkitem(di) {
-        this._drinkitem = di;
-    }
-    set price(p) {
-        this._price = p;
-    }
-}
-/*
-var requestsref = database.ref("requests");
-requestsref.on('value', gotData, errData);
-
-function gotData(data) {
-    var requests = data.val();
-    var keys = Object.keys(requests);
-    for (var i = 0; i < keys.length; i++) {
-        var k = keys[i];
-        var initials = requests[k].initials;
-        var request = requests[k].request
-    }
-}
-
-function errData(err) {
-    console.log("errData called with error")
-    console.log(err);
-}
-*/

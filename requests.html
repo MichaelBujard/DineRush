@@ -38,7 +38,22 @@
                 </ul>
             </li>
         </ul>
-        <script src='sample.js'></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+              apiKey: "AIzaSyCWt5g0BwctfmbT6lq8aQMbAM8GgtFPDns",
+              authDomain: "dinerush-346ad.firebaseapp.com",
+              databaseURL: "https://dinerush-346ad.firebaseio.com",
+              projectId: "dinerush-346ad",
+              storageBucket: "dinerush-346ad.appspot.com",
+              messagingSenderId: "588097331260"
+            };
+            firebase.initializeApp(config);
+          </script>
+        <script src='requests.js'></script>
     </body>
 
 </html>
+
+// using a proxy database DineRush-Requests
