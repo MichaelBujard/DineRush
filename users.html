@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Users
+        </title>
+    </head>
+
+    <body>
+
+        <ul id='userslist'>
+            <li>
+                request1
+                <ul>
+                    <li>
+                        fooditem: bread
+                    </li>
+                    <li>
+                        drinkitem: wine
+                    </li>
+                    <li>
+                        price: 400
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                request2
+                <ul>
+                    <li>
+                        fooditem2: fish
+                    </li>
+                    <li>
+                        drinkitem2: vinegar
+                    </li>
+                    <li>
+                        price: 500
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <div id='container'>
+            <p>Users:</p>
+
+            
+
+        </div>
+        
+        <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCWt5g0BwctfmbT6lq8aQMbAM8GgtFPDns",
+    authDomain: "dinerush-346ad.firebaseapp.com",
+    databaseURL: "https://dinerush-346ad.firebaseio.com",
+    projectId: "dinerush-346ad",
+    storageBucket: "dinerush-346ad.appspot.com",
+    messagingSenderId: "588097331260"
+  };
+  firebase.initializeApp(config);
+</script>
+
+        <script src='userspage.js'></script>
+    </body>
+
+</html>
