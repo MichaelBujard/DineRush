@@ -7,10 +7,10 @@ class Requests {
     private List<Order> foods;
     */
     constructor() {
-        this.username = "none"
-        this.fullname = "none"
-        this.address = "none"
+        this.username = "none";
+        this.fullname = "none";
+        this.address = "none";
         this.total = "none";
-        this.foods = "none"
+        this.foods = "none";
     }
 }
