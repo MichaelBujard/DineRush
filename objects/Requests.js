@@ -10,7 +10,7 @@ class Requests {
         this.username = "none"
         this.fullname = "none"
         this.address = "none"
-        this.total = "noe";
+        this.total = "none";
         this.foods = "none"
     }
 }
