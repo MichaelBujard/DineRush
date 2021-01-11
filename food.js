@@ -1,5 +1,0 @@
-class Food {
-    constructor() {
-        this.
-    }
-}
