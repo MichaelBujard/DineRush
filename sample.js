@@ -25,7 +25,7 @@ function registeraction() {
     });
 }
 
-// Let's try this array thing again.
+// Let's try this array implementation again.
 // var datainputs = []; // an empty array to put the data into
 // var ref = database.child('users'); // This is the database reference
 /*
@@ -197,7 +197,7 @@ function snapshotToArray(snapshot) {
 }
 */
  
- /** now we have an array. TO check if a username already exists,
+ /** now we have an array. To check if a username already exists,
   * simply iterate through the loop and check if the username matches any one of the 
   * users' usernames.
   */
